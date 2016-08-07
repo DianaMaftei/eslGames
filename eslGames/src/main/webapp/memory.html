@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- https://davidwalsh.name/css-flip -->
+<title>Insert title here</title>
+<!--<script src="js/prefixfree.min.js" type="application/javascript"></script>-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	for (var i = 0; i < 5; i++){
+		var board = document.getElementById("board");
+		var html = board.innerHTML += '<div class="flip-container"ontouchstart="this.classList.toggle(\'hover\');"><div class="flipper" id="flipper"><div class="front">FRONT</div><div class="back">BACK</div></div></div>';
+	};
+});
+
+$(document).ready(function(){
+	$(".front").click(function(){
+	    $(this).parent().parent().toggleClass("selected");
+	});
+});
+
+</script>
+</head>
+<body>
+	<div id="board"></div>
+
+	<style>
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000px;
+}
+/* flip the pane when hovered */
+.flip-container .selected .flipper, .flip-container.selected .flipper {
+	transform: rotateY(180deg);
+}
+
+.flip-container, .front, .back {
+	width: 100px;
+	height: 100px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.8s;
+	transform-style: preserve-3d;
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: inline-block;
+}
+
+/* front pane, placed above back */
+.front {
+	background-color: blue;
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	background-color: red;
+	transform: rotateY(180deg);
+}
+
+#board {
+	border: 3px solid green;
+	height: auto;
+	width: auto;
+	display: inline;
+}
+
+.flip-container {
+	display: inline-block;
+	padding-right:10px;
+}
+</style>
+</body>
+</html>
