@@ -7,19 +7,54 @@
 <!--<script src="js/prefixfree.min.js" type="application/javascript"></script>-->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="js/prefixfree.min.js"></script>
+
 <script>
+var words = ["CAR", "CAT", "TABLE", "JUMP", "JUMP","RUN", "DOG", "TEDDY-BEAR", "RUN", "DOLL", "TEDDY-BEAR", "TABLE", "CAR", "DOLL", "DOG", "CAT"];
+var previousTile;
+var current;
 $(document).ready(function(){
-	for (var i = 0; i < 5; i++){
-		var board = document.getElementById("board");
-		var html = board.innerHTML += '<div class="flip-container"ontouchstart="this.classList.toggle(\'hover\');"><div class="flipper" id="flipper"><div class="front"></div><div class="back">BACK</div></div></div>';
-	};
+	var index = 0;
+	for (var i = 0; i < 4; i++){
+		var board;
+		var html;
+		for (var j = 0; j < 4; j++){
+			board = document.getElementById("board");
+			html = board.innerHTML += '<div class="flip-container"ontouchstart="this.classList.toggle(\'hover\');"><div class="flipper" id="flipper"><div class="front"></div><div class="back">' + words[index] + '</div></div></div>';
+			index++;
+		};
+		html = board.innerHTML += "</br>";
+	};	
 });
 
 $(document).ready(function(){
 	$(".front").click(function(){
-		this.innerHTML = '<embed src=\"sound/240776__f4ngy__card-flip.wav\" hidden=\"true\" autostart=\"true\" loop=\"false\" />';
-	    $(this).parent().parent().toggleClass("selected");
-	    
+		if (previousTile == null){
+			previousTile = this;
+			this.innerHTML = '<embed src=\"sound/240776__f4ngy__card-flip.wav\" hidden=\"true\" autostart=\"true\" loop=\"false\" />';
+		    $(this).parent().parent().toggleClass("selected");
+		}else{
+			current = this;
+			current.innerHTML = '<embed src=\"sound/240776__f4ngy__card-flip.wav\" hidden=\"true\" autostart=\"true\" loop=\"false\" />';
+		    $(current).parent().parent().toggleClass("selected");
+		    
+		    if($(previousTile).next(".back").text() != $(current).next(".back").text()){
+		    	setTimeout(revert, 1500);
+			    function revert(){
+			    	console.log($(previousTile).next(".back").text());
+				    console.log($(current).next(".back").text());
+
+				    
+			      	previousTile.innerHTML = '<embed src=\"sound/240776__f4ngy__card-flip.wav\" hidden=\"true\" autostart=\"true\" loop=\"false\" />';
+			    	$(previousTile).parent().parent().toggleClass("selected");
+			    	$(current).parent().parent().toggleClass("selected");
+			    	previousTile = null;
+			    }	    
+			}else{
+				previousTile = null;
+			}
+		    
+		}
 	});
 });
 </script>
@@ -27,8 +62,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<div id="board">
-	</div>
+	<div id="board"></div>
 
 	<style>
 /* entire container, keeps perspective */
@@ -65,25 +99,29 @@ $(document).ready(function(){
 
 /* front pane, placed above back */
 .front {
-	background-color: blue;
+	background-color: #6FA617;
 	background-image: url("img/question-mark.png");
-	background-size: 90px 90px;
+	background-size: 80px 80px;
 	background-repeat: no-repeat;
 	background-position: center;
 	z-index: 2;
 	/* for firefox 31 */
 	transform: rotateY(0deg);
 	z-index: 2;
+	border: 3px solid #6FA617;
+	box-shadow: 0px 0px 0px 2px #fff inset;
+	box-sizing: border-box;
 }
 
 /* back, initially hidden pane */
 .back {
-	background-color: red;
+	box-shadow: 0px 0px 0px 3px #6FA617 inset;
+	background-color: white;
 	transform: rotateY(180deg);
+	text-align: center;
 }
 
 #board {
-	border: 3px solid green;
 	height: auto;
 	width: auto;
 	display: inline;
