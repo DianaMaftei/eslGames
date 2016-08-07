@@ -11,20 +11,24 @@
 $(document).ready(function(){
 	for (var i = 0; i < 5; i++){
 		var board = document.getElementById("board");
-		var html = board.innerHTML += '<div class="flip-container"ontouchstart="this.classList.toggle(\'hover\');"><div class="flipper" id="flipper"><div class="front">FRONT</div><div class="back">BACK</div></div></div>';
+		var html = board.innerHTML += '<div class="flip-container"ontouchstart="this.classList.toggle(\'hover\');"><div class="flipper" id="flipper"><div class="front"></div><div class="back">BACK</div></div></div>';
 	};
 });
 
 $(document).ready(function(){
 	$(".front").click(function(){
+		this.innerHTML = '<embed src=\"sound/240776__f4ngy__card-flip.wav\" hidden=\"true\" autostart=\"true\" loop=\"false\" />';
 	    $(this).parent().parent().toggleClass("selected");
+	    
 	});
 });
+</script>
 
 </script>
 </head>
 <body>
-	<div id="board"></div>
+	<div id="board">
+	</div>
 
 	<style>
 /* entire container, keeps perspective */
@@ -50,19 +54,26 @@ $(document).ready(function(){
 
 /* hide back of pane during swap */
 .front, .back {
+	border-radius: 10px;
 	backface-visibility: hidden;
 	position: absolute;
 	top: 0;
 	left: 0;
 	display: inline-block;
+	backface-visibility: hidden;
 }
 
 /* front pane, placed above back */
 .front {
 	background-color: blue;
+	background-image: url("img/question-mark.png");
+	background-size: 90px 90px;
+	background-repeat: no-repeat;
+	background-position: center;
 	z-index: 2;
 	/* for firefox 31 */
 	transform: rotateY(0deg);
+	z-index: 2;
 }
 
 /* back, initially hidden pane */
@@ -80,7 +91,7 @@ $(document).ready(function(){
 
 .flip-container {
 	display: inline-block;
-	padding-right:10px;
+	padding-right: 10px;
 }
 </style>
 </body>
