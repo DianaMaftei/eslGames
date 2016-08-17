@@ -1,7 +1,15 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
+<spring:url value="/resources/css/unscramble.css" var="unscrambleCSS" />
+<link href="${unscrambleCSS}" rel="stylesheet" />
+
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -24,7 +32,6 @@ $(function () {
 });
 
 $(document).ready(function(){
-	console.log(initWord.length);
 	for (var i = 0; i < initWord.length; i++) {
 		   var container = document.getElementById("drag_wrapper");
 		   var html = 
@@ -48,7 +55,9 @@ $(document).ready(function(){
 
 </script>
 
-<title>Insert title here</title>
+<title>Unscramble</title>
+
+
 </head>
 <body>
 	<div class="scrambler">
@@ -66,48 +75,6 @@ $(document).ready(function(){
 		</button>
 	</div>
 	
-<style>
 
-.letter {
-	text-align: center;
-	width : 42px;
-	height: 42px;
-	float: left;
-	padding-top:2px;
-	margin: 3px;
-	line-height: 36px;
-	border: 1px #1A7497 solid;
-	border-radius: 5px;
-	color: #000;
-	text-shadow: -1px -1px 1px rgb(40, 40, 40);
-	font-family: "NewsGoth Cn BT", Optima-Thin, "MS Gothic";
-	font-size: 36px;
-	background-color: #56AEDD;
-	-moz-box-shadow: 0 2px 0 #0e5975, 2px 3px 0 #0e5975, 3px 4px 2px #0e5975;
-	-webkit-box-shadow: 0 2px 0 #0e5975, 2px 3px 0 #0e5975, 3px 4px 2px
-		#0e5975;
-	box-shadow: 0 2px 0 #0e5975, 2px 3px 0 #0e5975, 3px 4px 2px #0e5975;
-}
-
-.scrambler {
-	padding-top: 50px;
-	margin: 0 auto;
-	text-align: center;
-	margin: 0 auto;
-}
-
-.btn {
-	font-size: 16px;
-	border-radius: 10px;
-    button:active { outline:none !important; }
-}
-
-#drag_wrapper {
-	height: auto; 
-	width : auto;
-	display: inline-block;
-	width: auto;
-}
-</style>
 </body>
 </html>

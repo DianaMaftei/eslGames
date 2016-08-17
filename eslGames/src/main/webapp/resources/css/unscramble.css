@@ -1,0 +1,40 @@
+.letter {
+	text-align: center;
+	width : 42px;
+	height: 42px;
+	float: left;
+	padding-top:2px;
+	margin: 3px;
+	line-height: 36px;
+	border: 1px #1A7497 solid;
+	border-radius: 5px;
+	color: #000;
+	text-shadow: -1px -1px 1px rgb(40, 40, 40);
+	font-family: "NewsGoth Cn BT", Optima-Thin, "MS Gothic";
+	font-size: 36px;
+	background-color: #56AEDD;
+	-moz-box-shadow: 0 2px 0 #0e5975, 2px 3px 0 #0e5975, 3px 4px 2px #0e5975;
+	-webkit-box-shadow: 0 2px 0 #0e5975, 2px 3px 0 #0e5975, 3px 4px 2px
+		#0e5975;
+	box-shadow: 0 2px 0 #0e5975, 2px 3px 0 #0e5975, 3px 4px 2px #0e5975;
+}
+
+.scrambler {
+	padding-top: 50px;
+	margin: 0 auto;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.btn {
+	font-size: 16px;
+	border-radius: 10px;
+    button:active { outline:none !important; }
+}
+
+#drag_wrapper {
+	height: auto; 
+	width : auto;
+	display: inline-block;
+	width: auto;
+}
