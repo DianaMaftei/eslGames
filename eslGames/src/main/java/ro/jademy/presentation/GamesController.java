@@ -31,4 +31,9 @@ public class GamesController {
 		return "unscramble";
 	}
 	
+	@RequestMapping(value = "/hangman")
+	public String hangman() {
+		return "hangman";
+	}
+	
 }
