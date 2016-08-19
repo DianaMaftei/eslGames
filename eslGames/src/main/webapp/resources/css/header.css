@@ -1,0 +1,32 @@
+.header {
+  background-color: pink;
+  height: 50px;
+  width: auto;
+  margin: 0;
+  position: relative;
+}
+
+#logo {
+  background-color: blue;
+  color: white;
+  line-height: 50px;
+  text-align: center;
+  vertical-align: middle;
+  width: 100px;
+  float: left;
+}
+
+#account {
+  background-color: red;
+  height: 50px;
+  width: 250px;
+  float: right;
+  text-align: center;
+}
+
+.login {
+  width: 45%;
+  height: 100%;
+  display: inline;
+}
+

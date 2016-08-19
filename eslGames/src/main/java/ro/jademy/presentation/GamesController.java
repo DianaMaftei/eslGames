@@ -1,7 +1,10 @@
 package ro.jademy.presentation;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -13,25 +16,41 @@ public class GamesController {
 	@RequestMapping(value = "/")
 	public String home() {
 		System.out.println("in controller home");
+		return "home";
+	}
+	
+	@RequestMapping(value = "/log", method = RequestMethod.GET)
+	public String showLoginPage() {
+		System.out.println("in controller log");
+		return "log";
+	}
+	
+	@RequestMapping(value = "/log", method = RequestMethod.POST)
+	public String showHomePage(@RequestParam String username, ModelMap model) {
+		model.put("username", username);
 		return "hello";
 	}
-	
-	@RequestMapping(value = "/gamesHome")
-	public String gamesHome() {
-		return "gamesHome";
+
+	@RequestMapping(value = "/games")
+	public String games() {
+		return "games";
+	}
+	@RequestMapping(method = RequestMethod.GET, value = "header")
+	public String header() {
+	    return "header";
 	}
 	
-	@RequestMapping(value = "/memory")
+	@RequestMapping(method = RequestMethod.GET, value = "game2")
 	public String memory() {
 		return "memory";
 	}
 	
-	@RequestMapping(value = "/unscramble")
+	@RequestMapping(method = RequestMethod.GET, value = "game1")
 	public String unscramble() {
 		return "unscramble";
 	}
 	
-	@RequestMapping(value = "/hangman")
+	@RequestMapping(method = RequestMethod.GET, value = "game3")
 	public String hangman() {
 		return "hangman";
 	}

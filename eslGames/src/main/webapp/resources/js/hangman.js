@@ -1,4 +1,6 @@
 //play the game
+$(document).ready(function(){
+	
 
 function resetGame () {
     resetUI();
@@ -7,6 +9,8 @@ function resetGame () {
     hangmanState = 0;
     drawWord(gameShownAnswer);    
 }
+
+
 $(document).ready(resetGame);
 function win () { alert('You win!');  resetGame() ;}
 function lose () { alert('Oh no, you lose!'); resetGame(); }
@@ -113,3 +117,5 @@ function guessLetter( letter, shown, answer ) {
  }
  return shown;
 }
+
+});
