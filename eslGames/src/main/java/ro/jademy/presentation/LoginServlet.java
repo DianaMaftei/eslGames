@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ro.jademy.domain.entity.LoginMessages;
-import ro.jademy.domain.entity.User;
+import ro.jademy.domain.entity.SiteUser;
 import ro.jademy.domain.service.LoginService;
 
 /**
@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 		LoginMessages loginMess = login.doLogin(username, password);
 
 		if (LoginMessages.SUCCESS.equals(loginMess)) {
-			User loggedIn = login.getUser(username);
+			SiteUser loggedIn = login.getUser(username);
 			response.sendRedirect("gamesHome.jsp");			
 		} else {
 			request.setAttribute("errorMessage", loginMess.toString() +":"+ loginMess.getMessage());

@@ -19,22 +19,11 @@ public class GamesController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/log", method = RequestMethod.GET)
-	public String showLoginPage() {
-		System.out.println("in controller log");
-		return "log";
-	}
-	
-	@RequestMapping(value = "/log", method = RequestMethod.POST)
-	public String showHomePage(@RequestParam String username, ModelMap model) {
-		model.put("username", username);
-		return "hello";
-	}
-
 	@RequestMapping(value = "/games")
 	public String games() {
 		return "games";
 	}
+	
 	@RequestMapping(method = RequestMethod.GET, value = "header")
 	public String header() {
 	    return "header";

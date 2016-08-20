@@ -1,15 +1,15 @@
 package ro.jademy.persistence;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import ro.jademy.domain.entity.SiteUser;
 import ro.jademy.domain.entity.TypeOfUser;
-import ro.jademy.domain.entity.User;
-import ro.jademy.domain.service.TransactionManager;
-
-
+import ro.jademy.util.HibernateUtil;
 
 /**
  *
@@ -17,67 +17,49 @@ import ro.jademy.domain.service.TransactionManager;
  */
 public class UserDAO {
 
-	public User getUserByUsername(String name) {
+	public SiteUser getUserByUsername(String username) {
 		
-		String username = null;
-		String password = null;
-		String fullName = null;
-		String email = null;
-		TypeOfUser userType = null;
+	Transaction transaction = null;
+	List<SiteUser> results;
+		
+		try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();	Session session = sessionFactory.openSession()){
+			transaction = session.beginTransaction();
+			
+			Query hqlQuery = session.createQuery("from SiteUser as siteUser where siteUser.username = :username");
+			results = hqlQuery.setString("username", username).list();			
+			
+			transaction.commit();
+			
+		}catch(Exception e){
+			transaction.rollback();
+			throw new RuntimeException("Cannot commit transaction.", e);
+		}	
 
-		Connection connection = new TransactionManager().getConnection();
-
-		String sql = "select * from site_users where username = ?";
-
-		PreparedStatement statement;
-		try {
-			statement = connection.prepareStatement(sql);
-			statement.setString(1, name);
-			ResultSet rs = statement.executeQuery();
-			while (rs.next()) {
-				fullName = rs.getString("full_name");
-				username = rs.getString("username");
-				password = rs.getString("password");
-				email = rs.getString("email");
-				userType = TypeOfUser.valueOf(rs.getString("user_type"));
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("Cannot execute query.", e);
-		}
-
-		if (username == null) {
-			return null;
-		} else {
-			User user = new User(fullName, username, email, password, userType);
-			return user;
-		}
-
+		return results.get(0);
 	}
 
-	public int updateDatabaseWithNewUser(String fullName, String username, String password, String email,
+	public void updateDatabaseWithNewUser(String fullName, String username, String password, String email,
 			TypeOfUser type) {
-
-		int updated = 0;
-		Connection connection = new TransactionManager().getConnection();
 		
-		String sql = "insert into site_users values (null, '?', '?', '?', '?', '?')";
+	Transaction transaction = null;
 		
-		PreparedStatement statement;
-		
-		try {
-			statement = connection.prepareStatement(sql);
-			statement.setString(1, fullName);
-			statement.setString(2, username);
-			statement.setString(3, password);
-			statement.setString(4, email);
-			statement.setString(5, type.toString());
-
-			updated = statement.executeUpdate();
-			return updated;
+		try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();	Session session = sessionFactory.openSession()){
+			transaction = session.beginTransaction();
 			
-		} catch (SQLException e) {
-			throw new RuntimeException("Cannot execute query.", e);
-		}
+			SiteUser user = new SiteUser();
+			user.setFullName(fullName);
+			user.setUsername(username);
+			user.setEmail(email);
+			user.setPassword(password);
+			user.setTypeOfUser(type);		
+				
+			session.save(user);
+			
+			transaction.commit();
+		}catch(Exception e){
+			transaction.rollback();
+			throw new RuntimeException("Cannot commit transaction.", e);
+		}	
 
 	}
 

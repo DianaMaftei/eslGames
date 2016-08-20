@@ -1,7 +1,9 @@
 package ro.jademy.domain.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import ro.jademy.domain.entity.LoginMessages;
-import ro.jademy.domain.entity.User;
+import ro.jademy.domain.entity.SiteUser;
 import ro.jademy.persistence.UserDAO;
 
 /**
@@ -9,15 +11,13 @@ import ro.jademy.persistence.UserDAO;
  * @author diana.maftei[at]gmail.com
  */
 public class LoginService {
+	@Autowired
+	private UserDAO userDAO;
 
-	TransactionManager tm = new TransactionManager();
 
 	public LoginMessages doLogin(String username, String password) {
 
-		try {
-			tm.beginTransaction();
-
-			User user = new UserDAO().getUserByUsername(username);
+			SiteUser user = userDAO.getUserByUsername(username);
 
 			if (user == null) {
 				return LoginMessages.INVALID_USERNAME;
@@ -25,25 +25,11 @@ public class LoginService {
 			if (!password.equals(user.getPassword())) {
 				return LoginMessages.INCORRECT_PASSWORD;
 			}
-			tm.commit();
 			return LoginMessages.SUCCESS;
 
-		} catch (Exception e) {
-			tm.rollback();
-			return LoginMessages.DATABASE_ERROR;
-		}
 	}
 
-	public User getUser(String username) {
-		User user;
-		try {
-			tm.beginTransaction();
-			user = new UserDAO().getUserByUsername(username);
-			tm.commit();
-		} catch (Exception e) {
-			tm.rollback();
-			return null;
-		}
-		return user;
+	public SiteUser getUser(String username) {
+		return userDAO.getUserByUsername(username);
 	}
 }

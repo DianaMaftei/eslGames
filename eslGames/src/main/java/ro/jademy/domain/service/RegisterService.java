@@ -3,9 +3,11 @@ package ro.jademy.domain.service;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import ro.jademy.domain.entity.RegisterMessages;
+import ro.jademy.domain.entity.SiteUser;
 import ro.jademy.domain.entity.TypeOfUser;
-import ro.jademy.domain.entity.User;
 import ro.jademy.persistence.UserDAO;
 
 /**
@@ -15,46 +17,37 @@ import ro.jademy.persistence.UserDAO;
 public class RegisterService {
 	private Pattern pr;
 	private Matcher m;
+	@Autowired
+	private UserDAO userDAO;
 
-	TransactionManager tm = new TransactionManager();
-
-	public RegisterMessages registerUser(String fullName, String username, String password1, String password2, String email,
-			TypeOfUser userType) {
-		try {
-			tm.beginTransaction();
-			if(!isFullNameValid(fullName)){
-				return RegisterMessages.INVALID_FULLNAME;
-			}
-			if(doesUserExist(username)){
-				return RegisterMessages.TAKEN_USERNAME;
-			}
-			if(!isUsernameValid(username)){
-				return RegisterMessages.INVALID_USERNAME;
-			}
-			if(!isEmailValid(email)){
-				return RegisterMessages.INVALID_EMAIL;
-			}
-			if(!isPasswordValid(password1)){
-				return RegisterMessages.INVALID_PASSWORD;
-			}
-			if(!doPasswordsMatch(password1, password2)){
-				return RegisterMessages.CONFIRM_PASSWORD;
-			}
-			
-			new UserDAO().updateDatabaseWithNewUser(fullName, username, password1, email, userType);
-			
-			tm.commit();
-			
-			return RegisterMessages.SUCCESS;
-
-		} catch (Exception e) {
-			tm.rollback();
-			return RegisterMessages.DATABASE_ERROR;
+	public RegisterMessages registerUser(String fullName, String username, String password1, String password2,
+			String email, TypeOfUser userType) {
+		if (!isFullNameValid(fullName)) {
+			return RegisterMessages.INVALID_FULLNAME;
 		}
+		if (doesUserExist(username)) {
+			return RegisterMessages.TAKEN_USERNAME;
+		}
+		if (!isUsernameValid(username)) {
+			return RegisterMessages.INVALID_USERNAME;
+		}
+		if (!isEmailValid(email)) {
+			return RegisterMessages.INVALID_EMAIL;
+		}
+		if (!isPasswordValid(password1)) {
+			return RegisterMessages.INVALID_PASSWORD;
+		}
+		if (!doPasswordsMatch(password1, password2)) {
+			return RegisterMessages.CONFIRM_PASSWORD;
+		}
+
+		userDAO.updateDatabaseWithNewUser(fullName, username, password1, email, userType);
+
+		return RegisterMessages.SUCCESS;
 	}
 
 	private boolean doesUserExist(String username) {
-		User user = new UserDAO().getUserByUsername(username);
+		SiteUser user = userDAO.getUserByUsername(username);
 		if (user == null) {
 			return false;
 		}
@@ -62,6 +55,7 @@ public class RegisterService {
 	}
 
 	private boolean isFullNameValid(String name) {
+		// with RegEx
 		String pattern = "[A-z ,.'-]+";
 		pr = Pattern.compile(pattern);
 		m = pr.matcher(name);
@@ -97,6 +91,7 @@ public class RegisterService {
 	}
 
 	private boolean isEmailValid(String email) {
+		// with RegEx
 		String pattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 		pr = Pattern.compile(pattern);
 		m = pr.matcher(email);
