@@ -6,13 +6,13 @@ package ro.jademy.domain.entity;
 public enum Level {
 	STARTERS("Starters"), MOVERS("Movers"), FLYERS("Flyers");
 	
-	private String level;
-	
-	private Level(String level) {
-		this.level = level;
+	private String name;
+
+	private Level(String name) {
+		this.name = name;
 	}
 
-	public String getLevel() {
-		return level;
+	public String getName() {
+		return name;
 	}
 }

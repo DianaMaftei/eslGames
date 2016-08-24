@@ -1,3 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form"
+	prefix="spring-form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html>
@@ -12,14 +16,16 @@
 <spring:url value="/resources/jquery/jquery-3.1.0.min.js" var="jqueryJS" />
 <script src='${jqueryJS}'></script>
 
-<script>var ctx = "${pageContext.request.contextPath}"</script>
 <script>
-$(function() { 
-    $(".gameBTN").click(function(){
-        var gameID = this.id; 
-      	  $("#games-room").load(ctx + "/" + gameID); 
-    }); 
-});
+	var ctx = "${pageContext.request.contextPath}"
+</script>
+<script>
+	$(function() {
+		$(".gameBTN").click(function() {
+			var gameID = this.id;
+			$("#games-room").load(ctx + "/" + gameID);
+		});
+	});
 </script>
 </head>
 <body>
@@ -33,9 +39,7 @@ $(function() {
 			<button id="game3" class="gameBTN">hangman</button>
 		</div>
 
-		<div id="games-room">
-
-		</div>
+		<div id="games-room"></div>
 		<!--footer-->
 	</div>
 

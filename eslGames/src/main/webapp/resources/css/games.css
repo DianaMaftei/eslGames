@@ -1,3 +1,15 @@
+html {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+}
+
+#choose-list{
+	width: 300px;
+	height: 100px;
+	background-color: red;
+	margin: 0 auto;	
+}
+
 .page {
   position: fixed;
   padding: 0;

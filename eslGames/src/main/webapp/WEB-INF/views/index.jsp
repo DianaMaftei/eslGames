@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <script src="https://use.fontawesome.com/12382560e6.js"></script>
 <title>ESL Games Account</title>
- 
+
 <!-- let's add tag srping:url -->
 <spring:url value="/resources/css/login-reg.css" var="loginCSS" />
 <link href="${loginCSS}" rel="stylesheet" />
@@ -26,54 +26,55 @@
 
 <body>
 	<div class="form">
-		<div class="thumbnail">
-		<img src="<c:url value="/resources/img/YLEmonkey.png" />" />
-
-		</div>
 		<form action="log" method="post" class="login-form">
-			<br /> <input type="text" name="username" placeholder="username"
-				autofocus required />
+			<input type="text" class="text" name="username"
+				placeholder="username" autofocus required />
 			<div class="arrow-up INVALID_USERNAME_arrow"></div>
 			<div class="error-flag INVALID_USERNAME"></div>
-			<input type="password" name="password" placeholder="password"
-				autofocus required />
+			<input type="password" class="text" name="password"
+				placeholder="password" autofocus required />
 			<div class="arrow-up INCORRECT_PASSWORD_arrow"></div>
 			<div class="error-flag INCORRECT_PASSWORD"></div>
-			<input type="checkbox" class="options" name="rememberMe" /> Remember
-			me
-			<button>login</button>
+			<div id="actions">
+				<button>sign in</button>
+				<input type="checkbox" class="options" name="rememberMe" />
+				Remember me
+			</div>
 			<p class="message">
 				Not registered? <a href="#">Create an account</a>
 			</p>
 		</form>
 		<form action="Register" method="post" class="register-form">
-			<input type="text" name="fullName" placeholder="full name" autofocus
-				required />
+			<input type="text" class="text" name="fullName"
+				placeholder="full name" autofocus required />
 			<div class="arrow-up INVALID_FULLNAME_arrow"></div>
 			<div class="error-flag INVALID_FULLNAME"></div>
-			<input type="text" name="username" placeholder="username" autofocus
-				required />
+			<input type="text" class="text" name="username"
+				placeholder="username" autofocus required />
 			<div class="arrow-up INVALID_USERNAME_arrow TAKEN_USERNAME_arrow"></div>
 			<div class="error-flag INVALID_USERNAME TAKEN_USERNAME"></div>
-			<input type="text" name="email" placeholder="email address" autofocus
-				required />
+			<input type="text" class="text" name="email"
+				placeholder="email address" autofocus required />
 			<div class="arrow-up INVALID_EMAIL_arrow"></div>
 			<div class="error-flag INVALID_EMAIL"></div>
-			<input type="password" name="password1" placeholder="password"
-				autofocus required />
+			<input type="password" class="text" name="password1"
+				placeholder="password" autofocus required />
 			<div class="arrow-up INVALID_PASSWORD_arrow"></div>
 			<div class="error-flag INVALID_PASSWORD"></div>
-			<input type="password" name="password2"
+			<input type="password" class="text" name="password2"
 				placeholder="confirm password" autofocus required />
 			<div class="arrow-up CONFIRM_PASSWORD_arrow"></div>
 			<div class="error-flag CONFIRM_PASSWORD"></div>
 
-			<input type="radio" class="options" name="type" value="teacher"
-				required> I am a teacher
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio"
-				class="options" name="type" value="student" required> I am a
-			student
-			<button>create</button>
+			<div id="actions">				
+				<input type="radio" class="options" name="type" value="teacher"
+					required> I am a teacher
+				<input type="radio"
+					class="options" name="type" value="student" required> I am
+				a student
+				<button>create</button>
+			</div>
+			<br>
 			<p class="message">
 				Already registered? <a href="#">Sign In</a>
 			</p>

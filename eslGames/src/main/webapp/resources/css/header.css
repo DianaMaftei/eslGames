@@ -1,32 +1,50 @@
 .header {
-  background-color: pink;
-  height: 50px;
-  width: auto;
-  margin: 0;
-  position: relative;
+	background-color: pink;
+	margin-bottom: 100px;
+	height: 50px;
 }
 
 #logo {
-  background-color: blue;
-  color: white;
-  line-height: 50px;
-  text-align: center;
-  vertical-align: middle;
-  width: 100px;
-  float: left;
+	width: 50px;
+	height: 50px;
+	display: inline;
+}
+
+#logo img {
+	width: 50px;
+	height: 50px;
+	background-color: #2598f5;
+	box-shadow: inset 0px 0px 6px #80ffff;
+	-webkit-box-shadow: inset 0px 0px 6px #80ffff;
+	border: 1px solid #0080ff;
+}
+
+#logo img:hover {
+	background-color: #0b7edd;
+	box-shadow: inset 0px 0px 6px #53a9ff;
+	-webkit-box-shadow: inset 0px 0px 6px #53a9ff;
 }
 
 #account {
-  background-color: red;
-  height: 50px;
-  width: 250px;
-  float: right;
-  text-align: center;
+	background-color: red;
+	height: 50px;
+	width: 250px;
+	float: right;
+	display: inline;
 }
 
-.login {
-  width: 45%;
-  height: 100%;
-  display: inline;
+#login-trigger {
+	background: rgb(247, 247, 247);
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	height: 25px;
+	line-height: 25px;
+	font-weight: bold;
+	padding: 0 8px;
+	text-decoration: none;
+	color: #444;
+	text-shadow: 0 1px 0 #fff;
+	border-right: 1px solid #ddd;
+	box-shadow: 0pt 2px 5px rgba(105, 108, 109, 0.7), 0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
 }
-
