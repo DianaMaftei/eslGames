@@ -41,6 +41,7 @@
 
 		<div id="games-room"></div>
 		<!--footer-->
+		<jsp:include page="${request.contextPath}/footer"></jsp:include>
 	</div>
 
 </body>

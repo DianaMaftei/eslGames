@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ro.jademy.domain.entity.RegisterMessages;
 import ro.jademy.domain.entity.SiteUser;
@@ -14,6 +15,7 @@ import ro.jademy.persistence.UserDAO;
  *
  * @author diana.maftei[at]gmail.com
  */
+@Service
 public class RegisterService {
 	private Pattern pr;
 	private Matcher m;

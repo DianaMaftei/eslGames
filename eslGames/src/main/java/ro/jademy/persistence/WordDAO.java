@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 import ro.jademy.domain.entity.Level;
 import ro.jademy.domain.entity.Theme;
@@ -18,6 +19,7 @@ import ro.jademy.util.HibernateUtil;
  *
  * @author diana.maftei[at]gmail.com
  */
+@Repository
 public class WordDAO {
 
 	public List<Word> getRandomWords(int numberOfWords, Level level, Theme theme) {

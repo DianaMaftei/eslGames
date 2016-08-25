@@ -3,6 +3,7 @@ package ro.jademy.domain.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ro.jademy.domain.entity.Level;
 import ro.jademy.domain.entity.Theme;
@@ -13,6 +14,7 @@ import ro.jademy.persistence.WordDAO;
 *
 *@author diana.maftei[at]gmail.com
 */
+@Service
 public class WordService {
 
 	@Autowired

@@ -10,12 +10,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author diana.maftei[at]gmail.com
  */
 @Entity
 @Table(name="Users")
+@Component
+@Scope("session")
 public class SiteUser implements Serializable{
 	@Id
 	@GeneratedValue

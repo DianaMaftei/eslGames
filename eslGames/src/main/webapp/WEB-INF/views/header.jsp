@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
@@ -21,61 +22,66 @@
 		<a href="#"><img src="<c:url value="/resources/img/planet.png" />" /></a>
 	</div>
 	<div id="account">
-		<a id="login-trigger" href="#"> Log in <span>&#x25BC;</span>
+		<a id="login-trigger" href="#"> Log in/Register <span>&#x25BC;</span>
 		</a>
+		<c:url value="/login" var="login"/>
+		<c:url value="/register" var="register"/>
 		<div class="form">
-			<form action="login" method="post" class="login-form">
-				<input type="text" class="text" name="username"
-					placeholder="username" autofocus required />
+			<form:form method="post" action="${login}" class="login-form" modelAttribute="user">
+				<form:input path="username" type="text" class="text" placeholder="username" autofocus="autofocus" required="required" />
+				
 				<div class="arrow-up INVALID_USERNAME_arrow"></div>
 				<div class="error-flag INVALID_USERNAME"></div>
-				<input type="password" class="text" name="password"
-					placeholder="password" autofocus required />
+				
+				<form:password path="password" class="text" placeholder="password" autofocus="autofocus" required="required" />
+				
 				<div class="arrow-up INCORRECT_PASSWORD_arrow"></div>
 				<div class="error-flag INCORRECT_PASSWORD"></div>
 				<div id="actions">
 					<button>sign in</button>
-					<input type="checkbox" class="options" name="rememberMe" />
-					Remember me
+					<input type="checkbox" class="options" name="rememberMe" />	Remember me
 				</div>
-				<p class="message">
-					Not registered? <a href="#">Create an account</a>
+				<p class="message">	Not registered? 
+					<a href="#">Create an account</a>
 				</p>
-			</form>
-			<form action="register" method="post" class="register-form">
-				<input type="text" class="text" name="fullName"
-					placeholder="full name" autofocus required />
+			</form:form>
+			
+			<form:form method="post" action="${register}" class="register-form" modelAttribute="user">
+				<form:input path="fullName" type="text" class="text" placeholder="full name" autofocus="autofocus" required="required" />
+				
 				<div class="arrow-up INVALID_FULLNAME_arrow"></div>
 				<div class="error-flag INVALID_FULLNAME"></div>
-				<input type="text" class="text" name="username"
-					placeholder="username" autofocus required />
+				
+				<form:input path="username" type="text" class="text" placeholder="username" autofocus="autofocus" required="required" />
+				
 				<div class="arrow-up INVALID_USERNAME_arrow TAKEN_USERNAME_arrow"></div>
 				<div class="error-flag INVALID_USERNAME TAKEN_USERNAME"></div>
-				<input type="text" class="text" name="email"
-					placeholder="email address" autofocus required />
+				
+				<form:input path="email" type="text" class="text" placeholder="email address" autofocus="autofocus" required="required" />
+				
 				<div class="arrow-up INVALID_EMAIL_arrow"></div>
 				<div class="error-flag INVALID_EMAIL"></div>
-				<input type="password" class="text" name="password1"
-					placeholder="password" autofocus required />
+				
+				<form:password path="password" class="text" placeholder="password" autofocus="autofocus" required="required" />
+				
 				<div class="arrow-up INVALID_PASSWORD_arrow"></div>
 				<div class="error-flag INVALID_PASSWORD"></div>
-				<input type="password" class="text" name="password2"
-					placeholder="confirm password" autofocus required />
+				
+				<form:password path="password" class="text" placeholder="confirm password" autofocus="autofocus" required="required" />
+				
 				<div class="arrow-up CONFIRM_PASSWORD_arrow"></div>
 				<div class="error-flag CONFIRM_PASSWORD"></div>
 
 				<div id="actions">
-					<input type="radio" class="options" name="type" value="teacher"
-						required> I am a teacher <input type="radio"
-						class="options" name="type" value="student" required> I am
-					a student
-					<button>create</button>
+					<form:radiobutton path="typeOfUser" class="options" value="teacher" required="required"/> I am a teacher 
+					<form:radiobutton path="typeOfUser" class="options" value="student" required="required"/> I am a student
+					<button>register</button>
 				</div>
 				<br>
-				<p class="message">
-					Already registered? <a href="#">Sign In</a>
+				<p class="message">	Already registered? 
+					<a href="#">Sign In</a>
 				</p>
-			</form>
+			</form:form>
 		</div>
 	</div>
 </div>
