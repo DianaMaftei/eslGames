@@ -18,27 +18,34 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: purple;
+  background: url("../img/bg-seamless.png");
+  background-size: 30% 30%;
 }
 /*--body*/
-#choose-game {
-  width: 300px;
-  margin: 10px auto;
-  text-align:center;
-}
-
-.gameBTN {
-  width: 85px;
-  height: 25%;
-  display: inline;
-  margin: 0 auto;
-}
-
 #games-room {
-  background-color: pink;
-  height: 550px;
-  max-width: 1000px;
+  background-color: #97b4bd;
+  background-image: url("../img/purplefr.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 850px;
+  max-width: 1500px;
   margin: 0 auto;
   border: 3px dotted white;
   display: block;
+}
+
+#close{
+	border: 2px solid red;
+	height: 30px;
+	width: 30px;
+	margin-top: 87px;
+	margin-right: 87px;
+	float:right;
+}
+
+#window{
+	border: 2px solid green;
+	height: 100%;
+	margin: 87px;
+	padding-top: 30px;
 }

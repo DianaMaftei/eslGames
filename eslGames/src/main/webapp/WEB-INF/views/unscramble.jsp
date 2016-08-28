@@ -23,14 +23,27 @@
 <script src='${unscrambleJS}'></script>
 
 <div class="scrambler">
-	<div id="drag-wrapper">
+	<div id="drag-wrapper"></div>
+	<div id="buttonsWrap">
+		<button type="button" class="btn btn-success" id="submitBTN">
+			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+			Submit
+		</button>
+		<button type="button" class="btn btn-info" id="resetBTN">
+			<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+			Reset
+		</button>
 	</div>
-	<br> <br> <br><br> <br>
-	<button type="button" class="btn btn-success" id="submitBTN">
-		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Submit
-	</button>
-	<button type="button" class="btn btn-info" id="resetBTN">
-		<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
-		Reset
-	</button>
+	<div id="pointsWrap">
+	<div id="point1" class="points"></div>
+	<div id="point2" class="points"></div>
+	<div id="point3" class="points"></div>
+	<div id="point4" class="points"></div>
+	<div id="point5" class="points"></div>
+	<div id="point6" class="points"></div>
+	<div id="point7" class="points"></div>
+	<div id="point8" class="points"></div>
+	<div id="point9" class="points"></div>
+	<div id="point10" class="points"></div>
+	</div>
 </div>

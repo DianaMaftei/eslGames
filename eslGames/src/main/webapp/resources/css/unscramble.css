@@ -33,13 +33,27 @@
 	border-radius: 10px;
 	margin: 10px;
 }
-.btn:active{
-	outline:none !important;
+
+.btn:active {
+	outline: none !important;
 }
 
 #drag-wrapper {
-    height: auto;
-    width: auto;
-    display: inline-block;
-    width: auto;
+	height: auto;
+	width: auto;
+	margin-bottom: 50px;
+	display: inline-block;
+}
+
+#pointsWrap {
+	padding: 10px;
+	margin-top: 50px;
+}
+
+.points {
+	border: 2px solid white;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	display: inline-block;
 }

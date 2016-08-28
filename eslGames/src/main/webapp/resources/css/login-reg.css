@@ -166,8 +166,6 @@ input {
 }
 
 body {
-	background-image: url("../img/bg_bg.png");
-	background-repeat: repeat;
 	font-family: "Roboto", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

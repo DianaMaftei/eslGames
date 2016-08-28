@@ -1,7 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://www.springframework.org/tags/form"
-	prefix="spring-form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html>
@@ -16,33 +13,26 @@
 <spring:url value="/resources/jquery/jquery-3.1.0.min.js" var="jqueryJS" />
 <script src='${jqueryJS}'></script>
 
-<script>
-	var ctx = "${pageContext.request.contextPath}"
-</script>
-<script>
-	$(function() {
-		$(".gameBTN").click(function() {
-			var gameID = this.id;
-			$("#games-room").load(ctx + "/" + gameID);
-		});
-	});
-</script>
 </head>
 <body>
 	<div class="page">
 		<!--header-->
 		<jsp:include page="${request.contextPath}/header"></jsp:include>
 		<!--body-->
-		<div id="choose-game">
-			<button id="game1" class="gameBTN">unscramble</button>
-			<button id="game2" class="gameBTN">memory</button>
-			<button id="game3" class="gameBTN">hangman</button>
+		<div id="games-room">
+			<div id="close">
+				<a href="#">X</a>
+			</div>
+			<div id="window"></div>
 		</div>
-
-		<div id="games-room"></div>
 		<!--footer-->
 		<jsp:include page="${request.contextPath}/footer"></jsp:include>
 	</div>
-
 </body>
+<script>
+	var ctx = "${pageContext.request.contextPath}";
+	$("#window").load(ctx + "/gamesMenu");
+
+
+</script>
 </html>

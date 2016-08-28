@@ -1,5 +1,7 @@
 package ro.jademy.presentation;
 
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +19,7 @@ import ro.jademy.domain.entity.Level;
 import ro.jademy.domain.entity.LoginMessages;
 import ro.jademy.domain.entity.SiteUser;
 import ro.jademy.domain.service.LoginService;
+import ro.jademy.domain.service.WordService;
 
 /**
  *
@@ -28,6 +31,9 @@ public class GamesController {
 	
 	@Autowired
 	LoginService login;
+	
+	@Autowired
+	WordService wordService;
 
 	@RequestMapping(value = "/")
 	public String home() {
@@ -82,9 +88,14 @@ public class GamesController {
 	    return "header";
 	}
 	
+	@RequestMapping(method = RequestMethod.GET, value = "gamesMenu")
+	public String gamesMenu() {
+	    return "gamesMenu";
+	}
+	
 	@RequestMapping(method = RequestMethod.GET, value = "game1")
 	public String unscramble() {
-		return "unscramble";
+			return "unscramble";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "game2")
