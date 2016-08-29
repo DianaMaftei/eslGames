@@ -11,4 +11,5 @@
 
 <div id="boardContainer">
 	<div id="board"></div>
+	<input type="hidden" id="words" value='${words}'/>
 </div>

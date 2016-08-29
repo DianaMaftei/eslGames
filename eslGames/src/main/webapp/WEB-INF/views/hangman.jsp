@@ -38,6 +38,7 @@
 	<div class='word-box'>
 		<div class='word-display'></div>
 	</div>
+	<input type="hidden" id="word" value='${word}'/>
 </div>
 
 

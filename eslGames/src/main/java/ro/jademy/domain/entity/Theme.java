@@ -4,7 +4,7 @@ package ro.jademy.domain.entity;
 *@author diana.maftei[at]gmail.com
 */
 public enum Theme {
-	ANIMALS("Animals"), CLOTHES("Clothes"), SPORT("Sport"), TOYS("Toys"), MISC("Other"), FAMILY("Family"), COLOR("Colors");
+	ANIMALS("Animals"), CLOTHES("Clothes"), SPORT("Sport"), TOYS("Toys"), MISC("Other"), FAMILY("Family"), COLOR("Colors"), BODY("Body");
 	
 	private String theme;
 

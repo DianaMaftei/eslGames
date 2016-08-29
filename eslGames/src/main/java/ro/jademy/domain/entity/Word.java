@@ -60,5 +60,12 @@ public class Word implements Serializable{
 	public void setTheme(Theme theme) {
 		this.theme = theme;
 	}
+	@Override
+	public String toString() {
+		return "Word [id=" + id + ", word=" + word + ", grammar=" + grammar + ", level=" + level + ", theme=" + theme
+				+ "]";
+	}
+	
+	
 	
 }

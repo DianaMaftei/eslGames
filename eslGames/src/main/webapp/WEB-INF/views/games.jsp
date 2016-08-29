@@ -33,6 +33,5 @@
 	var ctx = "${pageContext.request.contextPath}";
 	$("#window").load(ctx + "/gamesMenu");
 
-
 </script>
 </html>

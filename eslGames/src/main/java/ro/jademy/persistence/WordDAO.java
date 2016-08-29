@@ -21,11 +21,13 @@ import ro.jademy.util.HibernateUtil;
  */
 @Repository
 public class WordDAO {
+	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
 	public List<Word> getRandomWords(int numberOfWords, Level level, Theme theme) {
 		Transaction transaction = null;
 		List<Word> results;
-		try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory();Session session = sessionFactory.openSession()) {
+		
+		try (Session session = sessionFactory.openSession()) {
 			transaction = session.beginTransaction();
 			Criteria cr = session.createCriteria(Word.class);
 			cr.setMaxResults(numberOfWords);
@@ -38,7 +40,6 @@ public class WordDAO {
 			}
 
 			cr.add(Restrictions.sqlRestriction("1=1 order by random()"));
-			cr.setProjection(Projections.property("word"));
 
 			results = cr.list();
 			transaction.commit();

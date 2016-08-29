@@ -1,6 +1,7 @@
-var words = [ "CAR", "CAT", "TABLE", "JUMP", "JUMP", "RUN", "DOG",
-			"TEDDY-BEAR", "RUN", "DOLL", "TEDDY-BEAR", "TABLE", "CAR", "DOLL",
-			"DOG", "CAT" ];
+	 var wordsJSON = $('#words').val();
+	 var words = $.parseJSON(wordsJSON);
+	 
+	console.log(JSON.stringify(wordsJSON));
 
 	var soundHTML = '<embed src=\"sound/240776__f4ngy__card-flip.wav\" hidden=\"true\" autostart=\"true\" loop=\"false\" />';
 	var previousTile;

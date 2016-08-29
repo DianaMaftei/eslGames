@@ -91,10 +91,9 @@ function drawHead () {
 
 //rules of the game
 
-var words = ['cat', 'tree', 'swing', 'around', 'scientist'];
-
 function chooseWord () {
- return words[Math.floor(Math.random() * words.length)];
+	 var word = $('#word').val();
+ return word;
 }
 
 function blanksFromAnswer ( answerWord ) {  

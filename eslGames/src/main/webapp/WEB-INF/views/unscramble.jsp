@@ -40,10 +40,6 @@
 	<div id="point3" class="points"></div>
 	<div id="point4" class="points"></div>
 	<div id="point5" class="points"></div>
-	<div id="point6" class="points"></div>
-	<div id="point7" class="points"></div>
-	<div id="point8" class="points"></div>
-	<div id="point9" class="points"></div>
-	<div id="point10" class="points"></div>
 	</div>
+	<input type="hidden" id="words" value='${words}'/>
 </div>

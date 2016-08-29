@@ -22,7 +22,7 @@ import ro.jademy.persistence.WordDAO;
 public class WordService {
 
 	@Autowired
-	WordDAO wordDAO;
+	private WordDAO wordDAO;
 
 	private List<Word> getWords(int numberOfWords, Level level, Theme theme) {
 		return wordDAO.getRandomWords(numberOfWords, level, theme);
@@ -32,13 +32,13 @@ public class WordService {
 		Map<String, String> scrambledWords = new HashMap<String, String>();
 
 		List<Word> words = getWords(numberOfWords, level, theme);
-
+		
 		for (Word word : words) {
 			String initial = word.getWord();
 			String scrambled = scramble(initial);
 			scrambledWords.put(initial, scrambled);
 		}
-
+		System.out.println(scrambledWords);
 		return scrambledWords;
 	}
 
