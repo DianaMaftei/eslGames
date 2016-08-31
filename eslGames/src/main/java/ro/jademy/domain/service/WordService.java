@@ -36,6 +36,9 @@ public class WordService {
 		for (Word word : words) {
 			String initial = word.getWord();
 			String scrambled = scramble(initial);
+			while(initial.equals(scrambled)){
+				scrambled = scramble(initial);
+			}
 			scrambledWords.put(initial, scrambled);
 		}
 		System.out.println(scrambledWords);

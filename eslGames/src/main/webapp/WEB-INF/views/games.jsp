@@ -33,5 +33,11 @@
 	var ctx = "${pageContext.request.contextPath}";
 	$("#window").load(ctx + "/gamesMenu");
 
+	$("#close").click(function() {
+		var ctx = "${pageContext.request.contextPath}";
+		$("#close").css("display", "none");
+		$("#window").empty().load(ctx + "/gamesMenu");
+	});
+
 </script>
 </html>

@@ -53,7 +53,7 @@
 															".back").text() != $(
 															currentTile).next(
 															".back").text()) {
-														setTimeout(revert, 1500);
+														setTimeout(revert, 700);
 														function revert() {
 															previousTile.innerHTML = soundHTML;
 															$(previousTile)
