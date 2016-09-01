@@ -29,13 +29,27 @@
 }
 
 .btn {
-	font-size: 16px;
-	border-radius: 10px;
-	margin: 10px;
+  color: #fff;
+  background-color: #6496c8;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 10px #27496d;
+  padding: 10px;
+  margin-right:10px;
 }
 
-.btn:active {
-	outline: none !important;
+
+.btn:hover,
+.btn.hover {
+  background-color: #417cb8
+}
+
+.btn:active,
+.btn.active {
+  background-color: #417cb8;
+  box-shadow: 0 5px #27496d;
+  transform: translateY(5px);
+  outline: none !important;
 }
 
 #drag-wrapper {

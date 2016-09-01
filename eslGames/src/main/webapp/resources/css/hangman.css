@@ -11,7 +11,7 @@
     text-align:center;
 }
 .container-title {
-    color:#6f5a2d;
+    color:#ffffff;
 }
 .input-area {
     width:75px;
@@ -25,7 +25,7 @@
     background:#ebe2ce;
 }
 #letter-input {
-    border:1px #6f5a2d solid;
+    border:1px #000000solid;
     width:20pt;
     font-size:14pt;
     text-align:center;

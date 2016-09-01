@@ -8,7 +8,6 @@
 	var counter = 0;
 
 	 var words = $('#words').val();
-	 console.log(words);
 	 var wordsJSON = $.parseJSON(words);
 	 
 	 for(var key in wordsJSON){
@@ -43,17 +42,24 @@
 				var letter = $(this).text();
 				word += letter;
 			});
+			if(point === 5){
+				document.getElementById("drag-wrapper").innerHTML = "";
+				counter= 0;
+				wordList = ["Game Over", "Game Over"];
+				insertWord();
+				$("#submitBTN").prop("disabled",true);
+			}
 			if (word == solution) {
 				$("#point" + point).css("background-color", "green");
 				point++;
+				document.getElementById("drag-wrapper").innerHTML = "";
+				insertWord();
 			}else{
 				$("#point" + point).css("background-color", "red");
 				point++;
+				document.getElementById("drag-wrapper").innerHTML = "";
+				insertWord();
 			}
-			if(point === 6){
-				alert("Game over");
-			}
-			document.getElementById("drag-wrapper").innerHTML = "";
-			insertWord();
+
 		});
 	});

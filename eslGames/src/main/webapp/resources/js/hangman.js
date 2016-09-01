@@ -12,8 +12,8 @@ function resetGame () {
 
 
 $(document).ready(resetGame);
-function win () { alert('You win!');  resetGame() ;}
-function lose () { alert('Oh no, you lose!'); resetGame(); }
+function win () { alert('You win!');  }
+function lose () { alert('Oh no, you lose!');  }
 function doKeypress () {
     var tempChar = $('#letter-input').val().toLowerCase();
     var tempString = "";

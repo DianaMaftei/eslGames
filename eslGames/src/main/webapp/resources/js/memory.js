@@ -1,9 +1,6 @@
 	 var wordsJSON = $('#words').val();
 	 var words = $.parseJSON(wordsJSON);
 	 
-	console.log(JSON.stringify(wordsJSON));
-
-	var soundHTML = '<embed src=\"sound/240776__f4ngy__card-flip.wav\" hidden=\"true\" autostart=\"true\" loop=\"false\" />';
 	var previousTile;
 	var currentTile;
 	var faceUp = 0;
@@ -18,7 +15,7 @@
 							for (var j = 0; j < 4; j++) {
 								board = document.getElementById("board");
 								board.innerHTML += '<div class="flip-container" ontouchstart="this.classList.toggle(\'hover\');"><div class="flipper" id="flipper"><div class="front"></div><div class="back">'
-										+ words[index] + '</div></div></div>';
+										+ '<span>' + words[index] + '</span>' + '</div></div></div>';
 								index++;
 							}
 							;
@@ -35,7 +32,6 @@
 										function() {
 											if (faceUp == 0) {
 												previousTile = this;
-												this.innerHTML = soundHTML;
 												$(this)
 														.parent()
 														.parent()
@@ -43,7 +39,6 @@
 												faceUp++;
 											} else if (faceUp < 2) {
 												currentTile = this;
-												currentTile.innerHTML = soundHTML;
 												$(currentTile).parent()
 														.parent().toggleClass(
 																"selected");
@@ -55,7 +50,6 @@
 															".back").text()) {
 														setTimeout(revert, 700);
 														function revert() {
-															previousTile.innerHTML = soundHTML;
 															$(previousTile)
 																	.parent()
 																	.parent()

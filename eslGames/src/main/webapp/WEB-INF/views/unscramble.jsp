@@ -2,9 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!-- Unscramble -->
-<spring:url value="/resources/bootstrap/css/bootstrap.min.css"
-	var="bootstrapCSS" />
-<link href="${bootstrapCSS}" rel="stylesheet" />
+
 
 <spring:url value="/resources/jquery/jquery-3.1.0.min.js" var="jqueryJS" />
 <script src='${jqueryJS}'></script>
@@ -28,10 +26,6 @@
 		<button type="button" class="btn btn-success" id="submitBTN">
 			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 			Submit
-		</button>
-		<button type="button" class="btn btn-info" id="resetBTN">
-			<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
-			Reset
 		</button>
 	</div>
 	<div id="pointsWrap">
