@@ -32,90 +32,117 @@
 	<div class="page">
 		<!--header-->
 		<div class="header">
-	<div id="logo">
-		<a href="#"><img src="<c:url value="/resources/img/planet.png" />" /></a>
-	</div>
-	<div id="account">
-		<a id="login-trigger" href="#"> Log in/Register <span>&#x25BC;</span>
-		</a>
-		<c:url value="/login" var="login"/>
-		<c:url value="/register" var="register"/>
-		<div class="form">
-			<form:form method="post" action="${login}" class="login-form" modelAttribute="user">
-				<form:input path="username" type="text" class="text" placeholder="username" autofocus="autofocus" required="required" />
-				
-				<div class="arrow-up INVALID_USERNAME_arrow"></div>
-				<div class="error-flag INVALID_USERNAME"></div>
-				
-				<form:password path="password" class="text" placeholder="password" autofocus="autofocus" required="required" />
-				
-				<div class="arrow-up INCORRECT_PASSWORD_arrow"></div>
-				<div class="error-flag INCORRECT_PASSWORD"></div>
-				<div id="actions">
-					<button>sign in</button>
-					<input type="checkbox" class="options" name="rememberMe" />	Remember me
-				</div>
-				<p class="message">	Not registered? 
-					<a href="#">Create an account</a>
-				</p>
-			</form:form>
-			
-			<form:form method="post" action="${register}" class="register-form" modelAttribute="user">
-				<form:input path="fullName" type="text" class="text" placeholder="full name" autofocus="autofocus" required="required" />
-				
-				<div class="arrow-up INVALID_FULLNAME_arrow"></div>
-				<div class="error-flag INVALID_FULLNAME"></div>
-				
-				<form:input path="username" type="text" class="text" placeholder="username" autofocus="autofocus" required="required" />
-				
-				<div class="arrow-up INVALID_USERNAME_arrow TAKEN_USERNAME_arrow"></div>
-				<div class="error-flag INVALID_USERNAME TAKEN_USERNAME"></div>
-				
-				<form:input path="email" type="text" class="text" placeholder="email address" autofocus="autofocus" required="required" />
-				
-				<div class="arrow-up INVALID_EMAIL_arrow"></div>
-				<div class="error-flag INVALID_EMAIL"></div>
-				
-				<form:password path="password" class="text" placeholder="password" autofocus="autofocus" required="required" />
-				
-				<div class="arrow-up INVALID_PASSWORD_arrow"></div>
-				<div class="error-flag INVALID_PASSWORD"></div>
+			<input type="hidden" id="loggedIn" value="${log}" />
+			<div id="logo">
+				<a href="<c:url value="/" />"><img
+					src="<c:url value="/resources/img/planet.png" />" /></a>
+			</div>
+			<div id="top">
+				<img src="<c:url value="/resources/img/top.png" />" />
+			</div>
+			<div id="account">
+				<div id="logReg">
+					<a id="login-trigger" href="#"> Log in/Register <span>&#x25BC;</span>
+					</a>
+					<c:url value="/login" var="login" />
+					<c:url value="/register" var="register" />
+					<div class="form">
+						<form:form method="post" action="${login}" class="login-form"
+							modelAttribute="user">
+							<form:input path="username" type="text" class="text"
+								placeholder="username" autofocus="autofocus" required="required" />
+
+							<div class="arrow-up INVALID_USERNAME_arrow"></div>
+							<div class="error-flag INVALID_USERNAME"></div>
+
+							<form:password path="password" class="text"
+								placeholder="password" autofocus="autofocus" required="required" />
+
+							<div class="arrow-up INCORRECT_PASSWORD_arrow"></div>
+							<div class="error-flag INCORRECT_PASSWORD"></div>
+							<div id="actions">
+								<button>sign in</button>
+								<input type="checkbox" class="options" name="rememberMe" />
+								Remember me
+							</div>
+							<p class="message">
+								Not registered? <a href="#">Create an account</a>
+							</p>
+						</form:form>
+
+						<form:form method="post" action="${register}"
+							class="register-form" modelAttribute="user">
+							<form:input path="fullName" type="text" class="text"
+								placeholder="full name" autofocus="autofocus"
+								required="required" />
+
+							<div class="arrow-up INVALID_FULLNAME_arrow"></div>
+							<div class="error-flag INVALID_FULLNAME"></div>
+
+							<form:input path="username" type="text" class="text"
+								placeholder="username" autofocus="autofocus" required="required" />
+
+							<div class="arrow-up INVALID_USERNAME_arrow TAKEN_USERNAME_arrow"></div>
+							<div class="error-flag INVALID_USERNAME TAKEN_USERNAME"></div>
+
+							<form:input path="email" type="text" class="text"
+								placeholder="email address" autofocus="autofocus"
+								required="required" />
+
+							<div class="arrow-up INVALID_EMAIL_arrow"></div>
+							<div class="error-flag INVALID_EMAIL"></div>
+
+							<form:password path="password" class="text"
+								placeholder="password" autofocus="autofocus" required="required" />
+
+							<div class="arrow-up INVALID_PASSWORD_arrow"></div>
+							<div class="error-flag INVALID_PASSWORD"></div>
 
 
-				<div id="actions">
-					<form:radiobutton path="typeOfUser" class="options" value="teacher" required="required"/> I am a teacher 
-					<form:radiobutton path="typeOfUser" class="options" value="student" required="required"/> I am a student
-					<button>register</button>
+							<div id="actions">
+								<form:radiobutton path="typeOfUser" class="options"
+									value="TEACHER" required="required" />
+								I am a teacher
+								<form:radiobutton path="typeOfUser" class="options"
+									value="STUDENT" required="required" />
+								I am a student
+								<button>register</button>
+							</div>
+							<br>
+							<p class="message">
+								Already registered? <a href="#">Sign In</a>
+							</p>
+							<input type="hidden" id="togLogin" value='${toggleLogin}' />
+							<input type="hidden" id="togRegister" value='${toggleRegister}' />
+						</form:form>
+					</div>
 				</div>
-				<br>
-				<p class="message">	Already registered? 
-					<a href="#">Sign In</a>
-				</p>
-				<input type="hidden" id="togLogin" value='${toggleLogin}'/>
-				<input type="hidden" id="togRegister" value='${toggleRegister}'/>
-			</form:form>
+				<div id="welcome">
+					<span>Welcome, ${log.username}.</span> &nbsp; &nbsp; &nbsp; &nbsp;
+					<span><a href="<c:url value="/logout" />">Logout</a></span>
+				</div>
+			</div>
 		</div>
-	</div>
-</div>
 		<!--body-->
 		<div id="games-room">
 			<div id="close">
 				<a href="#">X</a>
 			</div>
-			<div id="window"></div>
+			<div id="window">
+				<div id="games"></div>
+			</div>
 		</div>
 		<!--footer-->
-		<jsp:include page="${request.contextPath}/footer"></jsp:include>
 	</div>
 </body>
 <script>
 	var ctx = "${pageContext.request.contextPath}";
-	$("#window").load(ctx + "/gamesMenu");
+	$("#games").load(ctx + "/gamesMenu");
 
 	$("#close").click(function() {
 		var ctx = "${pageContext.request.contextPath}";
 		$("#close").css("display", "none");
-		$("#window").empty().load(ctx + "/gamesMenu");
+		$("#games").empty().load(ctx + "/gamesMenu");
 	});
 
 	$(document).ready(function() {
@@ -130,16 +157,16 @@
 		else
 			$(this).find('span').html('&#x25BC;')
 	}
-	
+
 	var toggleRegister = function() {
 		$('form').animate({
 			height : "toggle",
 			opacity : "toggle"
 		}, "slow");
 	}
-	
+
 	$('.message a').click(toggleRegister);
-	
+
 	$(document).ready(function() {
 		var toggleR = $('#togRegister').val();
 		var toggleL = $('#togLogin').val();
@@ -147,7 +174,7 @@
 			toggleRegister();
 			$('.form').css("display", "block");
 		}
-		if(toggleL == "true"){
+		if (toggleL == "true") {
 			$('.form').css("display", "block");
 		}
 	});
@@ -159,9 +186,21 @@
 							var result = errorMessage.split(":");
 							document.getElementsByClassName(result[0])[0].innerHTML = result[1];
 							document.getElementsByClassName(result[0])[0].style.display = "block";
-							document.getElementsByClassName(result[0]+ "_arrow")[0].style.display = "block";
+							document.getElementsByClassName(result[0]
+									+ "_arrow")[0].style.display = "block";
 						}
 					});
 
+	$(document).ready(function() {
+		var logged = $('#loggedIn').val();
+		console.log(logged);
+		if(logged === ""){
+			$('#logReg').css("display", "inline");
+			$('#welcome').css("display", "none");
+		}else{
+			$('#logReg').css("display", "none");
+			$('#welcome').css("display", "inline");
+		}
+	});
 </script>
 </html>

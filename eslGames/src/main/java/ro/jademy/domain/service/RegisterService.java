@@ -26,9 +26,6 @@ public class RegisterService {
 		if (!isFullNameValid(fullName)) {
 			return RegisterMessages.INVALID_FULLNAME;
 		}
-		if (doesUserExist(username)) {
-			return RegisterMessages.TAKEN_USERNAME;
-		}
 		if (!isUsernameValid(username)) {
 			return RegisterMessages.INVALID_USERNAME;
 		}
@@ -37,8 +34,9 @@ public class RegisterService {
 		}
 		if (!isPasswordValid(password)) {
 			return RegisterMessages.INVALID_PASSWORD;
+		}if (doesUserExist(username)) {
+			return RegisterMessages.TAKEN_USERNAME;
 		}
-
 		userDAO.updateDatabaseWithNewUser(fullName, username, password, email, userType);
 
 		return RegisterMessages.SUCCESS;
@@ -78,12 +76,13 @@ public class RegisterService {
 
 	private boolean isPasswordValid(String password) {
 		// with RegEx
-		String pattern = "^(?=\\w*\\d)(?=\\w*[a-z])(?=\\w*[A-Z])\\w{6,14}$";
+		String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
 		pr = Pattern.compile(pattern);
 		m = pr.matcher(password);
 		if (m.matches()) {
 			return true;
 		} else {
+			System.out.println("doesn't match");
 			return false;
 		}
 	}

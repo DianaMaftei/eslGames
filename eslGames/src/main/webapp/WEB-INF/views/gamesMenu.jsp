@@ -14,8 +14,6 @@
 <spring:url value="/resources/css/dropdown.css" var="dropdownCSS" />
 <link href="${dropdownCSS}" rel="stylesheet" />
 
-
-
 <div class="fleft">
 	<select id="level" class="cd-dropdown cd-select">
 		<option value="empty" id="main1" selected>Level</option>
@@ -68,7 +66,7 @@
 		var gameID = this.id;
 		var ctx = "${pageContext.request.contextPath}";
 		$("#close").css("display", "block");
-		$("#window").empty().load(ctx + "/" + gameID + "?level=" + gLevel + "&theme=" + gTheme);
+		$("#games").empty().load(ctx + "/" + gameID + "?level=" + gLevel + "&theme=" + gTheme);
 	});
 
 </script>

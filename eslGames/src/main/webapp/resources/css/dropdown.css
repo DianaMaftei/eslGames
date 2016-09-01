@@ -1,11 +1,14 @@
 .fleft {
 	float: left;
 	width: 200px;
+	margin-left: 6%;
+	margin-top: 4%;
 }
 .fright {
 	float: right;
 	width: 200px;
-	margin-right: 10px;
+	margin-right: 6.5%;
+	margin-top: 4%;
 }
 
 .cd-dropdown,

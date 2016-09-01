@@ -18,19 +18,18 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("../img/bg-seamless.png");
-  background-size: 30% 30%;
+  background: linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.70)),
+                rgba(0,0,0,0.70) url("../img/bg-seamless.png");
 }
 /*--body*/
 #games-room {
   background-color: #97b4bd;
-  background-image: url("../img/purplefr.png");
+  background-image: url("../img/greenfr.png");
   background-repeat: no-repeat;
   background-size: 100%;
   height: 850px;
   max-width: 1500px;
   margin: 0 auto;
-  border: 3px dotted white;
   display: block;
 }
 
@@ -45,8 +44,12 @@ html {
 }
 
 #window{
-	border: 2px solid green;
 	height: 100%;
-	margin: 87px;
-	padding-top: 30px;
+	margin: 0 auto;
+	padding-top: 10%;
+}
+
+#games{
+	height:100%;
+	margin: 0 auto;
 }

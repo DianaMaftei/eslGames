@@ -9,6 +9,7 @@ import java.util.Random;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,7 +51,7 @@ public class GamesController {
 
 	@RequestMapping(value = "/")
 	public String home() {
-		return "index";
+		return "home";
 	}
 
 	@RequestMapping(value = "/games", method = RequestMethod.GET)
@@ -61,7 +62,7 @@ public class GamesController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView signIn(@ModelAttribute("user") SiteUser user, HttpServletRequest request,
+	public String signIn(@ModelAttribute("user") SiteUser user, HttpServletRequest request,
 			HttpServletResponse response) {
 		
 		LoginMessages loginMess = login.doLogin(user.getUsername(), user.getPassword());
@@ -70,36 +71,37 @@ public class GamesController {
 			SiteUser loggedIn = login.getUser(user.getUsername());
 			request.getSession().setAttribute("log", loggedIn);
 			response.addCookie(new Cookie("foo", "bar"));
-			return new ModelAndView("games");
+			return "games";
 		} else {
 			System.err.println("failure to login");
 			request.setAttribute("toggleLogin", "true");
 			request.setAttribute("errorMessage", loginMess.toString() +":"+ loginMess.getMessage());
-			return new ModelAndView("games");
+			return "games";
 		}
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logOut(HttpServletRequest request, @ModelAttribute("user") SiteUser user) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "games";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView signUp(@ModelAttribute("user") SiteUser user, HttpServletRequest request, HttpServletResponse response) {
+	public String signUp(@ModelAttribute("user") SiteUser user, HttpServletRequest request, HttpServletResponse response) {
 		 RegisterMessages regMess = register.registerUser(user.getFullName(), user.getUsername(), user.getPassword(), user.getEmail(), user.getTypeOfUser());
-
 		 if (RegisterMessages.SUCCESS.equals(regMess)) {
 			 	login.doLogin(user.getUsername(), user.getPassword());
 				SiteUser loggedIn = login.getUser(user.getUsername());
 				request.getSession().setAttribute("log", loggedIn);
 				response.addCookie(new Cookie("foo", "bar"));
 				System.out.println(loggedIn);
-				return new ModelAndView("redirect:games");
+				return "games";
 		 } else {
 				request.setAttribute("toggleRegister", "true");
 				request.setAttribute("errorMessage", regMess.toString() +":"+ regMess.getMessage());
-				return new ModelAndView("redirect:games");
+				return "games";
 		 }
-	}
-
-	@RequestMapping(method = RequestMethod.GET, value = "header")
-	public String header() {
-		return "header";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "gamesMenu")

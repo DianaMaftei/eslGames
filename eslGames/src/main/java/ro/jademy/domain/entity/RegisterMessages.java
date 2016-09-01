@@ -5,8 +5,7 @@ package ro.jademy.domain.entity;
 */
 public enum RegisterMessages {
 	
-	INVALID_PASSWORD("Enter a combination of at least six letters, numbers and punctuation marks."),
-	CONFIRM_PASSWORD("Passwords do not match."),
+	INVALID_PASSWORD("Password must contain at least one lowercase letter, uppercase letter, special character and digit, and it must be at least 8 characters long."),
 	TAKEN_USERNAME("Username already in use."),
 	INVALID_EMAIL("Please enter a valid email address."),
 	INVALID_FULLNAME("Please enter your full name."),
