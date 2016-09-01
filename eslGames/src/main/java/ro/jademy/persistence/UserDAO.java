@@ -28,19 +28,17 @@ public class UserDAO {
 
 		try (Session session = sessionFactory.openSession()) {
 			transaction = session.beginTransaction();
-
 			Query hqlQuery = session.createQuery("from SiteUser as siteUser where siteUser.username = :username");
-			System.err.println("after hglquery");
 			results = hqlQuery.setString("username", username).list();
-			System.err.println("after result");
-
 			transaction.commit();
 
 		} catch (Exception e) {
 			transaction.rollback();
 			throw new RuntimeException("Cannot commit transaction.", e);
 		}
-
+		if(results.size() == 0){
+			return null;
+		}
 		return results.get(0);
 	}
 

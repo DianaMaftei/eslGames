@@ -45,12 +45,11 @@ public class RegisterServlet extends HttpServlet {
 		String fullName = request.getParameter("fullName");
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
-		String password1 = request.getParameter("password1");
-		String password2 = request.getParameter("password2");
+		String password = request.getParameter("password");
 		TypeOfUser userType = TypeOfUser.valueOf(request.getParameter("type").toUpperCase());
 		
 		RegisterService register = new RegisterService();
-		RegisterMessages regMess = register.registerUser(fullName, username, password1, password2, email, userType);
+		RegisterMessages regMess = register.registerUser(fullName, username, password, email, userType);
 		
 		if (RegisterMessages.SUCCESS.equals(regMess)) {
 			response.sendRedirect("gamesHome.jsp");			

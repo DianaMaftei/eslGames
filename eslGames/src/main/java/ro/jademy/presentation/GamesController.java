@@ -24,9 +24,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ro.jademy.domain.entity.Level;
 import ro.jademy.domain.entity.LoginMessages;
+import ro.jademy.domain.entity.RegisterMessages;
 import ro.jademy.domain.entity.SiteUser;
 import ro.jademy.domain.entity.Theme;
 import ro.jademy.domain.service.LoginService;
+import ro.jademy.domain.service.RegisterService;
 import ro.jademy.domain.service.WordService;
 
 /**
@@ -39,6 +41,9 @@ public class GamesController {
 
 	@Autowired
 	LoginService login;
+	
+	@Autowired
+	RegisterService register;
 
 	@Autowired
 	WordService wordService;
@@ -58,31 +63,38 @@ public class GamesController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView signIn(@ModelAttribute("user") SiteUser user, HttpServletRequest request,
 			HttpServletResponse response) {
-		System.out.println(login);
-
+		
 		LoginMessages loginMess = login.doLogin(user.getUsername(), user.getPassword());
 
 		if (LoginMessages.SUCCESS.equals(loginMess)) {
 			SiteUser loggedIn = login.getUser(user.getUsername());
 			request.getSession().setAttribute("log", loggedIn);
 			response.addCookie(new Cookie("foo", "bar"));
-			return new ModelAndView("redirect:games");
+			return new ModelAndView("games");
 		} else {
 			System.err.println("failure to login");
-			return new ModelAndView("redirect:games");
+			request.setAttribute("toggleLogin", "true");
+			request.setAttribute("errorMessage", loginMess.toString() +":"+ loginMess.getMessage());
+			return new ModelAndView("games");
 		}
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String signUp(@ModelAttribute("user") SiteUser user) {
-		System.out.println(user.getUsername());
-		// RegisterMessages regMess = register.registerUser(fullName, username,
-		// password1, password2, email, userType);
+	public ModelAndView signUp(@ModelAttribute("user") SiteUser user, HttpServletRequest request, HttpServletResponse response) {
+		 RegisterMessages regMess = register.registerUser(user.getFullName(), user.getUsername(), user.getPassword(), user.getEmail(), user.getTypeOfUser());
 
-		// if (RegisterMessages.SUCCESS.equals(regMess)) {
-		// } else {
-		// }
-		return "greeting";
+		 if (RegisterMessages.SUCCESS.equals(regMess)) {
+			 	login.doLogin(user.getUsername(), user.getPassword());
+				SiteUser loggedIn = login.getUser(user.getUsername());
+				request.getSession().setAttribute("log", loggedIn);
+				response.addCookie(new Cookie("foo", "bar"));
+				System.out.println(loggedIn);
+				return new ModelAndView("redirect:games");
+		 } else {
+				request.setAttribute("toggleRegister", "true");
+				request.setAttribute("errorMessage", regMess.toString() +":"+ regMess.getMessage());
+				return new ModelAndView("redirect:games");
+		 }
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "header")
@@ -96,29 +108,29 @@ public class GamesController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "game1")
-	public String unscramble(@RequestParam("level") String level, @RequestParam("theme") String theme, Model model) {	
+	public String unscramble(@RequestParam("level") String level, @RequestParam("theme") String theme, Model model) {
 		Level gameLevel = null;
-		if(!level.equals("empty")){
+		if (!level.equals("empty")) {
 			gameLevel = Level.valueOf(level);
-		}		
+		}
 		Theme gameTheme = null;
-		if(!theme.equals("empty")){
+		if (!theme.equals("empty")) {
 			gameTheme = Theme.valueOf(theme);
-		}			
+		}
 		Map<String, String> words = wordService.getScrambled(5, gameLevel, gameTheme);
 		JSONObject wordsJSON = new JSONObject(words);
 		model.addAttribute("words", wordsJSON);
 		return "unscramble";
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "game2")
 	public String memory(@RequestParam("level") String level, @RequestParam("theme") String theme, Model model) {
 		Level gameLevel = null;
-		if(!level.equals("empty")){
+		if (!level.equals("empty")) {
 			gameLevel = Level.valueOf(level);
-		}		
+		}
 		Theme gameTheme = null;
-		if(!theme.equals("empty")){
+		if (!theme.equals("empty")) {
 			gameTheme = Theme.valueOf(theme);
 		}
 		List<String> wordsSingle = wordService.getWordList(8, gameLevel, gameTheme);
@@ -133,11 +145,11 @@ public class GamesController {
 	@RequestMapping(method = RequestMethod.GET, value = "game3")
 	public String hangman(@RequestParam("level") String level, @RequestParam("theme") String theme, Model model) {
 		Level gameLevel = null;
-		if(!level.equals("empty")){
+		if (!level.equals("empty")) {
 			gameLevel = Level.valueOf(level);
-		}		
+		}
 		Theme gameTheme = null;
-		if(!theme.equals("empty")){
+		if (!theme.equals("empty")) {
 			gameTheme = Theme.valueOf(theme);
 		}
 		String word = wordService.getWordList(1, gameLevel, gameTheme).get(0);

@@ -31,7 +31,6 @@ public class LoginService {
 	}
 
 	public SiteUser getUser(String username) {
-		System.out.println(userDAO);
 		return userDAO.getUserByUsername(username);
 	}
 }

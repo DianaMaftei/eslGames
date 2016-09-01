@@ -25,11 +25,14 @@ public class SiteUser implements Serializable{
 	@Id
 	@GeneratedValue
 	private Long id;
+	
 	private String fullName;
+	
 	private String password;
 	
 	@Column(name = "username", unique=true)
 	private String username;
+	
 	private String email;
 	
 	@Enumerated(EnumType.STRING)
@@ -82,6 +85,7 @@ public class SiteUser implements Serializable{
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 
 	@Override
 	public String toString() {

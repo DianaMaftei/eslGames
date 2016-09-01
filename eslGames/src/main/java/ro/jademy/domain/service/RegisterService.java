@@ -22,8 +22,7 @@ public class RegisterService {
 	@Autowired
 	private UserDAO userDAO;
 
-	public RegisterMessages registerUser(String fullName, String username, String password1, String password2,
-			String email, TypeOfUser userType) {
+	public RegisterMessages registerUser(String fullName, String username, String password, String email, TypeOfUser userType) {
 		if (!isFullNameValid(fullName)) {
 			return RegisterMessages.INVALID_FULLNAME;
 		}
@@ -36,14 +35,11 @@ public class RegisterService {
 		if (!isEmailValid(email)) {
 			return RegisterMessages.INVALID_EMAIL;
 		}
-		if (!isPasswordValid(password1)) {
+		if (!isPasswordValid(password)) {
 			return RegisterMessages.INVALID_PASSWORD;
 		}
-		if (!doPasswordsMatch(password1, password2)) {
-			return RegisterMessages.CONFIRM_PASSWORD;
-		}
 
-		userDAO.updateDatabaseWithNewUser(fullName, username, password1, email, userType);
+		userDAO.updateDatabaseWithNewUser(fullName, username, password, email, userType);
 
 		return RegisterMessages.SUCCESS;
 	}
@@ -98,16 +94,6 @@ public class RegisterService {
 		pr = Pattern.compile(pattern);
 		m = pr.matcher(email);
 		if (m.matches()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private boolean doPasswordsMatch(String pass1, String pass2) {
-		if (pass1 == null || pass2 == null) {
-			return false;
-		} else if (pass1.equals(pass2)) {
 			return true;
 		} else {
 			return false;
