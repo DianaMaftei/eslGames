@@ -5,10 +5,142 @@
   text-align:center;
 }
 
-.gameBTN {
-  width: 85px;
-  height: 25%;
-  display: inline;
+
+
+/**
+ * Component: Button
+ * --------------------------------------------------
+ */
+
+.c-button {
+  -webkit-appearance: none;
+  position: relative;
+  display: block;
+  padding: 12px 24px;
   margin: 0 auto;
+  margin-bottom: 20px;
+  vertical-align: middle;
+  overflow: visible;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 1px;
+  border: 0;
+  user-select: none;
+  box-shadow: 2px 2px 0 0 darken(#434A54, 5%);
+  transition: all 0.2s ease;
+  &:hover,
+  &:focus {
+    outline: 0;
+    text-decoration: none;
+  }
+  &:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
+/**
+ * Mixin: Button Modifier
+ * --------------------------------------------------
+ */
+
+
+.c-button--purple{
+	background: #967ADC;
+	text-shadow: 2px 2px 0 #7652d1;
+}
+.c-button--purple:hover{
+	background: #8666d7;
+}
+
+.c-button--blue{
+	background: #4A89DC;
+	    text-shadow: 2px 2px 0 #276ecc;
+}
+.c-button--blue:hover{
+	    background: #357bd8;
+}
+
+.c-button--red{
+	background: #E9573F;
+	text-shadow: 2px 2px 0 #dc3519;
+}
+.c-button--red:hover{
+	background: #e64328;
+}
+
+/**
+ * Component: Button
+ * Modifier: Purple
+ * --------------------------------------------------
+ */
+
+@include button-modifier(#967ADC, purple);
+
+/**
+ * Component: Button
+ * Modifier: Blue
+ * --------------------------------------------------
+ */
+
+@include button-modifier(#4A89DC, blue);
+
+/**
+ * Component: Button
+ * Modifier: Red
+ * --------------------------------------------------
+ */
+
+@include button-modifier(#E9573F, red);
+
+/**
+ * Utility: Ripple
+ * --------------------------------------------------
+ */
+
+.c-ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+.c-ripple__circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .25);
+  .c-ripple.is-active & {
+    animation: a-ripple .4s ease-in;
+  }
+}
+
+/**
+ * Animation: Ripple
+ * --------------------------------------------------
+ */
+
+@keyframes a-ripple {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    width: 200%;
+    padding-bottom: 200%;
+    opacity: 0;
+  }
+}

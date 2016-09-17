@@ -31,14 +31,20 @@
 	</select>
 </div>
 <div id="choose-game">
-	<button id="game1" class="gameBTN">unscramble</button>
-	<button id="game2" class="gameBTN">memory</button>
-	<button id="game3" class="gameBTN">hangman</button>
+	<button id="game1" class="c-button c-button--purple gameBTN"> <div class="c-ripple js-ripple">
+    <span class="c-ripple__circle"></span>
+  </div>Unscramble</button>
+	<button id="game2" class="c-button c-button--blue gameBTN"> <div class="c-ripple js-ripple">
+    <span class="c-ripple__circle"></span>
+  </div>Memory</button>
+	<button id="game3" class="c-button c-button--red gameBTN"> <div class="c-ripple js-ripple">
+    <span class="c-ripple__circle"></span>
+  </div>Hangman</button>
 </div>
 <script>
 	var gLevel = "empty";
 	var gTheme = "empty";
-	
+
 	$(function() {
 		$('#theme').dropdown({
 			gutter : 0,
@@ -58,15 +64,49 @@
 			onOptionSelect : function(opt) {
 				gLevel = opt.attr("data-value");
 			}
-			
+
 		});
 	});
 
-	$(".gameBTN").click(function() {
-		var gameID = this.id;
-		var ctx = "${pageContext.request.contextPath}";
-		$("#close").css("display", "block");
-		$("#games").empty().load(ctx + "/" + gameID + "?level=" + gLevel + "&theme=" + gTheme);
-	});
+	$(".gameBTN").click(
+			function() {
+				var gameID = this.id;
+				var ctx = "${pageContext.request.contextPath}";
+				$("#close").css("display", "block");
+				$("#games").empty().load(
+						ctx + "/" + gameID + "?level=" + gLevel + "&theme="
+								+ gTheme);
+			});
 
+
+
+	;(function($, window, document, undefined) {
+
+		  'use strict';
+
+		  var $ripple = $('.js-ripple');
+
+		  $ripple.on('click.ui.ripple', function(e) {
+
+		    var $this = $(this);
+		    var $offset = $this.parent().offset();
+		    var $circle = $this.find('.c-ripple__circle');
+
+		    var x = e.pageX - $offset.left;
+		    var y = e.pageY - $offset.top;
+
+		    $circle.css({
+		      top: y + 'px',
+		      left: x + 'px'
+		    });
+
+		    $this.addClass('is-active');
+
+		  });
+
+		  $ripple.on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', function(e) {
+		  	$(this).removeClass('is-active');
+		  });
+
+		})(jQuery, window, document);
 </script>
